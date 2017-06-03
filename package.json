@@ -1,0 +1,24 @@
+{
+  "name": "prepare-images-for-ssd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/HPI-DeepLearning-PlaceRecognizer-SS17/prepare-images-for-ssd.git"
+  },
+  "author": "Arthur Silber",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HPI-DeepLearning-PlaceRecognizer-SS17/prepare-images-for-ssd/issues"
+  },
+  "homepage": "https://github.com/HPI-DeepLearning-PlaceRecognizer-SS17/prepare-images-for-ssd#readme",
+  "dependencies": {
+    "coffee-script": "^1.12.6",
+    "glob": "^7.1.2",
+    "minimist": "^1.2.0"
+  }
+}
