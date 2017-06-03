@@ -18,7 +18,9 @@
   "homepage": "https://github.com/HPI-DeepLearning-PlaceRecognizer-SS17/prepare-images-for-ssd#readme",
   "dependencies": {
     "coffee-script": "^1.12.6",
+    "fs-extra": "^3.0.1",
     "glob": "^7.1.2",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1"
   }
 }
