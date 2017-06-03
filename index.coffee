@@ -14,8 +14,8 @@ printUsage = ->
 	console.log ' --sourceDir <path>                 - folder where the image dataset is'
 	console.log ' --label <string>                   - what label the selected images get applied'
 	console.log ' --output <default pascalVoc>       - how the output data is to be formatted'
-	console.log ' --maxNumberOfImages <default 100>  - the maximum number of images that are selected'
-	console.log ' --valPercentage <default 15>       - percentage of selected images that are used as a validation set'
+	console.log ' --maxNumberOfImages <default 200>  - the maximum number of images that are selected'
+	console.log ' --valPercentage <default 10>       - percentage of selected images that are used as a validation set'
 	console.log ' --filterManualBbox <default true>  - only allow images that have a manually annotated bounding box'
 	return
 
@@ -27,8 +27,8 @@ for requiredArgument in requiredArguments
 		return
 
 args.output ?= 'pascalVoc'
-args.maxNumberOfImages ?= 100
-args.valPercentage ?= 15
+args.maxNumberOfImages ?= 200
+args.valPercentage ?= 10
 args.filterManualBbox ?= true
 
 loadAllImages = (dir) ->
@@ -87,7 +87,7 @@ if fs.existsSync labelsFile
 if labels.indexOf(args.label) < 0
 	labels.push args.label
 
-fs.writeFileSync labelsFile, JSON.stringify labels, true,
+fs.writeFileSync labelsFile, JSON.stringify labels, true, 2
 
 _transferImage = (image, targetDir) ->
 	# Find the matching jpeg file - the exact file name may differ depending on the downloaded size
