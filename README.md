@@ -17,7 +17,21 @@ npm install
 
 ## PREPARE.JS
 
-Please run `node server.js` to see usage information.
+Run `node prepare.js` with the following arguments
+
+```
+Usage:
+ --targetDir <path>                 - folder where the prepared images will be copied into
+ --sourceDir <path>                 - folder where the image dataset is
+ --label <string>                   - what label the selected images get applied
+ --output <default pascalVoc>       - how the output data is to be formatted
+ --maxNumberOfImages <default 200>  - the maximum number of images that are selected
+ --valPercentage <default 10>       - percentage of selected images that are used as a validation set
+ --filterManualBbox <default true>  - only allow images that have a manually annotated bounding box
+```
+
+Example call: 
+`node prepare.js --sourceDir "D:\Dropbox\pva-training-set\flickr-parsed\dl-rathaus-berlin" --targetDir "D:\Dropbox\pva-training-set\flickr-parsed\#prepared" --label rathausberlin`
 
 ## FIX-ANNOTATION-ERRORS.JS
 
