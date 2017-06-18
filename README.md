@@ -9,13 +9,11 @@ Currently, there are two scripts:
 ## Installation & Dependencies
 
 Please make sure that you have `Node` and `npm` installed.
-Afterwards, run 
-```
-npm install
-```
+Afterwards, run `npm install`.
 
+## Prepare.js
 
-## PREPARE.JS
+### Usage
 
 Run `node prepare.js` with the following arguments
 
@@ -33,7 +31,17 @@ Usage:
 Example call: 
 `node prepare.js --sourceDir "D:\Dropbox\pva-training-set\flickr-parsed\dl-rathaus-berlin" --targetDir "D:\Dropbox\pva-training-set\flickr-parsed\#prepared" --label rathausberlin`
 
-## FIX-ANNOTATION-ERRORS.JS
+### Dockerfile
+
+There is a Dockerfile to build Prepare.js. Use the script `buildDockerImage.sh` to build it, then you can use the application with docker, e.g.
+```
+sudo docker run -v /hostPathToImages:/srcImg -v /hostTargetDir:/dstImg \
+     prepare-images-for-ssd --sourceDir "/srcImg/berlinerdom" --targetDir "/dstImg" --label berlinerdom
+```
+
+## Fix-annotation-errors.js
+
+(The script should not be needed anymore)
 
 This script is capable of fixing the following errors:
 
