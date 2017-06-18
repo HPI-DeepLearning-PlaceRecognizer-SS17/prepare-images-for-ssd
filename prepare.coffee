@@ -13,10 +13,9 @@ printUsage = ->
 	console.log ' --targetDir <path>                 - folder where the prepared images will be copied into'
 	console.log ' --sourceDir <path>                 - folder where the image dataset is'
 	console.log ' --label <string>                   - what label the selected images get applied'
-	console.log ' --output <default pascalVoc>       - how the output data is to be formatted'
 	console.log ' --maxNumberOfImages <default 200>  - the maximum number of images that are selected'
 	console.log ' --valPercentage <default 10>       - percentage of selected images that are used as a validation set'
-	console.log ' --filterManualBbox <default true>  - only allow images that have a manually annotated bounding box'
+	console.log ' --filterBbox <default true>        - only allow images that have a manually / automatically annotated and approved bounding box'
 	return
 
 requiredArguments = ['targetDir', 'sourceDir', 'label']
@@ -26,10 +25,9 @@ for requiredArgument in requiredArguments
 		printUsage()
 		return
 
-args.output ?= 'pascalVoc'
 args.maxNumberOfImages ?= 200
 args.valPercentage ?= 10
-args.filterManualBbox ?= true
+args.filterBbox ?= true
 
 loadAllImages = (dir) ->
 	dir = path.normalize dir
@@ -51,11 +49,11 @@ args.targetDir = path.resolve args.targetDir
 images = loadAllImages(args.sourceDir)
 console.log 'Images loaded.'
 
-if args.filterManualBbox is true
-	console.log 'Filtering for images that have a manually annotated bounding box'
+if args.filterBbox is true
+	console.log 'Filtering for images that have a manually / automatically annotated and approved bounding box'
 
 	images = images.filter (image) ->
-		return image.manualAnnotation?.bbox?
+		return image.annotationStatus is 'manuallyAnnotated' or image.annotationStatus is 'autoAnnotated-Good'
 
 	console.log "After filtering, #{images.length} images are left"
 
@@ -108,8 +106,9 @@ _transferImage = (image, targetDir) ->
 	distJson = {
 		id: image.id
 		label: args.label
-		boundingBox: image.manualAnnotation.bbox
+		boundingBox: image.boundingBox
 	}
+
 	jsonFile = path.join targetDir, "#{image.id}.json"
 	fs.writeFileSync jsonFile, JSON.stringify distJson, true, 2
 
